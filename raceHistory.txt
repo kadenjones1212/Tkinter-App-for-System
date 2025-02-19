@@ -1,0 +1,122 @@
+10K RESUME | Date, Wed Feb  5 14:52:54 2025
+RunnerEnd: 1111 | EndTime, 00:00:06.184 | Date, Wed Feb  5 14:53:00 2025
+RunnerEnd: 2222 | EndTime, 00:00:07.185 | Date, Wed Feb  5 14:53:01 2025
+RunnerEnd: 3333 | EndTime, 00:00:08.188 | Date, Wed Feb  5 14:53:02 2025
+RunnerEnd: 4444 | EndTime, 00:00:09.191 | Date, Wed Feb  5 14:53:03 2025
+10K PAUSED | RaceTime, 00:00:11.927 | Date, Wed Feb  5 14:53:06 2025
+10K END | EndTime, 00:00:11.929 | Date, Wed Feb  5 14:53:08 2025
+
+<BREAK>
+
+5K RESUME | Date, Wed Feb  5 14:53:37 2025
+5K PAUSED | RaceTime, 00:00:11.833 | Date, Wed Feb  5 14:53:49 2025
+5K END | EndTime, 00:00:11.834 | Date, Wed Feb  5 14:53:51 2025
+
+<BREAK>
+
+5K RESUME | Date, Wed Feb  5 17:10:32 2025
+5K PAUSED | RaceTime, 00:00:01.444 | Date, Wed Feb  5 17:10:34 2025
+5K END | EndTime, 00:00:01.445 | Date, Wed Feb  5 17:10:34 2025
+
+<BREAK>
+
+10K RESUME | Date, Wed Feb  5 17:21:29 2025
+10K PAUSED | RaceTime, 00:00:02.623 | Date, Wed Feb  5 17:21:32 2025
+10K END | EndTime, 00:00:02.624 | Date, Wed Feb  5 17:21:35 2025
+
+<BREAK>
+
+400m RESUME | Date, Wed Feb  5 17:55:20 2025
+RunnerEnd: 1111 | EndTime, 00:00:23.994 | Date, Wed Feb  5 17:55:44 2025
+RunnerEnd: 2222 | EndTime, 00:00:24.996 | Date, Wed Feb  5 17:55:45 2025
+RunnerEnd: 3333 | EndTime, 00:00:25.998 | Date, Wed Feb  5 17:55:46 2025
+RunnerEnd: 4444 | EndTime, 00:00:27.000 | Date, Wed Feb  5 17:55:47 2025
+400m PAUSED | RaceTime, 00:00:30.605 | Date, Wed Feb  5 17:55:51 2025
+400m END | EndTime, 00:00:30.606 | Date, Wed Feb  5 17:55:55 2025
+
+<BREAK>
+
+5K RESUME | Date, Wed Feb  5 18:17:20 2025
+5K PAUSED | RaceTime, 00:00:04.232 | Date, Wed Feb  5 18:17:25 2025
+5K END | EndTime, 00:00:04.234 | Date, Wed Feb  5 18:17:27 2025
+
+<BREAK>
+
+10K RESUME | Date, Wed Feb  5 18:25:03 2025
+10K PAUSED | RaceTime, 00:00:02.460 | Date, Wed Feb  5 18:25:05 2025
+10K END | EndTime, 00:00:02.461 | Date, Wed Feb  5 18:25:07 2025
+
+<BREAK>
+
+400m RESUME | Date, Wed Feb  5 18:27:50 2025
+400m PAUSED | RaceTime, 00:00:01.763 | Date, Wed Feb  5 18:27:51 2025
+400m RESUME | Date, Wed Feb  5 18:27:53 2025
+400m PAUSED | RaceTime, 00:00:02.682 | Date, Wed Feb  5 18:27:54 2025
+400m END | EndTime, 00:00:02.683 | Date, Wed Feb  5 18:27:55 2025
+
+<BREAK>
+
+5K RESUME | Date, Thu Feb  6 08:29:23 2025
+RunnerEnd: 1111 | EndTime, 00:00:01.389 | Date, Thu Feb  6 08:29:25 2025
+RunnerEnd: 2222 | EndTime, 00:00:02.391 | Date, Thu Feb  6 08:29:26 2025
+RunnerEnd: 3333 | EndTime, 00:00:03.392 | Date, Thu Feb  6 08:29:27 2025
+RunnerEnd: 4444 | EndTime, 00:00:04.393 | Date, Thu Feb  6 08:29:28 2025
+5K PAUSED | RaceTime, 00:00:16.481 | Date, Thu Feb  6 08:29:40 2025
+5K END | EndTime, 00:00:16.481 | Date, Thu Feb  6 08:29:44 2025
+
+<BREAK>
+
+10K RESUME | Date, Thu Feb  6 08:35:18 2025
+SystemLap | LapTime, 00:00:01.677 | Date, Thu Feb  6 08:35:20 2025
+SystemLap | LapTime, 00:00:02.156 | Date, Thu Feb  6 08:35:20 2025
+SystemLap | LapTime, 00:00:04.984 | Date, Thu Feb  6 08:35:23 2025
+SystemLap | LapTime, 00:00:05.990 | Date, Thu Feb  6 08:35:24 2025
+SystemLap | LapTime, 00:00:07.054 | Date, Thu Feb  6 08:35:25 2025
+SystemLap | LapTime, 00:00:47.505 | Date, Thu Feb  6 08:36:06 2025
+SystemLap | LapTime, 00:00:48.251 | Date, Thu Feb  6 08:36:06 2025
+SystemLap | LapTime, 00:00:49.753 | Date, Thu Feb  6 08:36:08 2025
+10K PAUSED | RaceTime, 00:01:04.245 | Date, Thu Feb  6 08:36:22 2025
+10K RESUME | Date, Thu Feb  6 08:36:24 2025
+10K PAUSED | RaceTime, 00:01:06.833 | Date, Thu Feb  6 08:36:26 2025
+10K END | EndTime, 00:01:06.834 | Date, Thu Feb  6 08:36:27 2025
+
+<BREAK>
+
+10K RESUME | Date, Thu Feb  6 10:57:54 2025
+SystemLap | LapTime, 00:00:01.957 | Date, Thu Feb  6 10:57:56 2025
+SystemLap | LapTime, 00:00:02.818 | Date, Thu Feb  6 10:57:57 2025
+SystemLap | LapTime, 00:00:03.337 | Date, Thu Feb  6 10:57:57 2025
+SystemLap | LapTime, 00:00:04.136 | Date, Thu Feb  6 10:57:58 2025
+SystemLap | LapTime, 00:00:04.615 | Date, Thu Feb  6 10:57:59 2025
+SystemLap | LapTime, 00:00:04.867 | Date, Thu Feb  6 10:57:59 2025
+10K PAUSED | RaceTime, 00:00:06.267 | Date, Thu Feb  6 10:58:00 2025
+10K RESUME | Date, Thu Feb  6 10:58:04 2025
+10K PAUSED | RaceTime, 00:00:10.090 | Date, Thu Feb  6 10:58:08 2025
+10K END | EndTime, 00:00:10.091 | Date, Thu Feb  6 10:58:09 2025
+
+<BREAK>
+
+5K RESUME | Date, Thu Feb  6 13:22:38 2025
+SystemLap | LapTime, 00:00:07.088 | Date, Thu Feb  6 13:22:45 2025
+SystemLap | LapTime, 00:00:07.580 | Date, Thu Feb  6 13:22:46 2025
+SystemLap | LapTime, 00:00:08.127 | Date, Thu Feb  6 13:22:46 2025
+5K PAUSED | RaceTime, 00:00:11.929 | Date, Thu Feb  6 13:22:50 2025
+5K END | EndTime, 00:00:11.931 | Date, Thu Feb  6 13:22:52 2025
+
+<BREAK>
+
+5K RESUME | Date, Wed Feb 12 21:20:02 2025
+5K PAUSED | RaceTime, 00:01:27.492 | Date, Wed Feb 12 21:21:29 2025
+5K END | EndTime, 00:01:27.493 | Date, Wed Feb 12 21:21:30 2025
+
+<BREAK>
+
+5K RESUME | Date, Fri Feb 14 12:29:48 2025
+SystemLap | LapTime, 00:00:05.532 | Date, Fri Feb 14 12:29:54 2025
+SystemLap | LapTime, 00:00:06.454 | Date, Fri Feb 14 12:29:55 2025
+SystemLap | LapTime, 00:00:06.939 | Date, Fri Feb 14 12:29:55 2025
+5K PAUSED | RaceTime, 00:00:07.728 | Date, Fri Feb 14 12:29:56 2025
+5K END | EndTime, 00:00:07.729 | Date, Fri Feb 14 12:30:17 2025
+
+<BREAK>
+
