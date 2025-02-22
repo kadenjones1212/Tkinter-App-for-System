@@ -1,0 +1,63 @@
+[
+  {
+    "runType": "race",
+    "raceDistance": "10K",
+    "date": "2/5/2025 14:52:54",
+    "events": [
+      { "eventType": "raceStart", "date": "2/5/2025 14:52:54", "raceTime": "00:00:00.000" },
+      { "eventType": "runnerLap", "runnerID": 1111, "date": "2/5/2025 14:53:00", "raceTime": "00:00:06.184" },
+      { "eventType": "runnerFinish", "runnerID": 1111, "date": "2/5/2025 14:54:30", "raceTime": "00:01:36.200" },
+      { "eventType": "runnerFinish", "runnerID": 2222, "date": "2/5/2025 14:54:45", "raceTime": "00:01:51.500" },
+      { "eventType": "raceStop", "date": "2/5/2025 14:55:00", "raceTime": "00:02:06.000" }
+    ]
+  },
+  {
+    "runType": "workout",
+    "raceDistance": "5K",
+    "date": "1/10/2025 12:30:00",
+    "events": [
+      { "eventType": "raceStart", "date": "1/10/2025 12:30:00", "raceTime": "00:00:00.000" },
+      { "eventType": "runnerLap", "runnerID": 3333, "date": "1/10/2025 12:35:00", "raceTime": "00:05:00.000" },
+      { "eventType": "runnerFinish", "runnerID": 3333, "date": "1/10/2025 12:45:00", "raceTime": "00:15:00.000" },
+      { "eventType": "raceStop", "date": "1/10/2025 12:50:00", "raceTime": "00:20:00.000" }
+    ]
+  },
+  {
+    "runType": "race",
+    "raceDistance": "Marathon",
+    "date": "3/1/2025 08:00:00",
+    "events": [
+      { "eventType": "raceStart", "date": "3/1/2025 08:00:00", "raceTime": "00:00:00.000" },
+      { "eventType": "runnerLap", "runnerID": 4444, "date": "3/1/2025 08:30:00", "raceTime": "00:30:00.000" },
+      { "eventType": "runnerLap", "runnerID": 5555, "date": "3/1/2025 08:35:00", "raceTime": "00:35:00.000" },
+      { "eventType": "runnerFinish", "runnerID": 4444, "date": "3/1/2025 10:15:00", "raceTime": "02:15:00.000" },
+      { "eventType": "runnerFinish", "runnerID": 5555, "date": "3/1/2025 10:45:00", "raceTime": "02:45:00.000" },
+      { "eventType": "raceStop", "date": "3/1/2025 11:00:00", "raceTime": "03:00:00.000" }
+    ]
+  },
+  {
+    "runType": "workout",
+    "raceDistance": "1600m",
+    "date": "4/15/2025 16:10:00",
+    "events": [
+      { "eventType": "raceStart", "date": "4/15/2025 16:10:00", "raceTime": "00:00:00.000" },
+      { "eventType": "runnerLap", "runnerID": 6666, "date": "4/15/2025 16:10:58", "raceTime": "00:00:58.000" },
+      { "eventType": "runnerLap", "runnerID": 6666, "date": "4/15/2025 16:11:56", "raceTime": "00:01:56.000" },
+      { "eventType": "runnerLap", "runnerID": 6666, "date": "4/15/2025 16:12:55", "raceTime": "00:02:55.000" },
+      { "eventType": "runnerFinish", "runnerID": 6666, "date": "4/15/2025 16:13:50", "raceTime": "00:03:50.000" },
+      { "eventType": "raceStop", "date": "4/15/2025 16:14:00", "raceTime": "00:04:00.000" }
+    ]
+  },
+  {
+    "runType": "race",
+    "raceDistance": "800m",
+    "date": "5/20/2025 18:45:00",
+    "events": [
+      { "eventType": "raceStart", "date": "5/20/2025 18:45:00", "raceTime": "00:00:00.000" },
+      { "eventType": "runnerLap", "runnerID": 7777, "date": "5/20/2025 18:45:55", "raceTime": "00:00:55.000" },
+      { "eventType": "runnerFinish", "runnerID": 7777, "date": "5/20/2025 18:47:30", "raceTime": "00:02:30.000" },
+      { "eventType": "runnerFinish", "runnerID": 8888, "date": "5/20/2025 18:48:00", "raceTime": "00:03:00.000" },
+      { "eventType": "raceStop", "date": "5/20/2025 18:48:15", "raceTime": "00:03:15.000" }
+    ]
+  }
+]
