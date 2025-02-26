@@ -8,7 +8,11 @@ from tkinter import PhotoImage
 # Initialize the main window
 root = tk.Tk()
 root.attributes('-fullscreen',True)
+back.settingsRewrite(0,f'scn_w = {root.winfo_screenwidth()}\n')
+back.settingsRewrite(1,f'scn_h = {root.winfo_screenheight()}\n')
+
 root.geometry(str(sys.scn_w) + 'x' + str(sys.scn_h))
+
 root.configure(bg=sys.cSecond)
 back.clearTempLog() #Clear the activeRace.json on bootup to make sure no errors arise when logging a race
 #root.resizable(False,False)
