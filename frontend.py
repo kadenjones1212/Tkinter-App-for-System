@@ -7,10 +7,11 @@ from tkinter import PhotoImage
 
 # Initialize the main window
 root = tk.Tk()
+root.attributes('-fullscreen',True)
 root.geometry(str(sys.scn_w) + 'x' + str(sys.scn_h))
 root.configure(bg=sys.cSecond)
 back.clearTempLog() #Clear the activeRace.json on bootup to make sure no errors arise when logging a race
-root.resizable(False,False)
+#root.resizable(False,False)
 def clearScreen():# Function to clear the screen by destroying all widgets
     for widget in root.winfo_children():
         widget.destroy()
@@ -34,23 +35,28 @@ def updateHeader(vtext,boolIcons = True):
     global settingsIcon
     global homeIconButton
     global homeIcon
+    global closeIconButton
+    global closeIcon
 
     settingsIcon = '⚙️'
-    homeIcon = '🏠'
+    homeIcon = '⌂'
+    closeIcon = '✖'
     icon_size = int(sys.scn_h / 10)  # Same size as the current main title
     if boolIcons == True:
         settingsIconButton = makeDefaultButton(settingsIcon, settingsScreen)
-        settingsIconButton.place(x=sys.scn_w - icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)  # Adjust position and size as needed
+        settingsIconButton.place(x=sys.scn_w - 2*icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)  # Adjust position and size as needed
 
         homeIconButton = makeDefaultButton(homeIcon, mainMenuScreen)
-        homeIconButton.place(x=sys.scn_w - 2*icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)  # Adjust position and size as needed
-
+        homeIconButton.place(x=sys.scn_w - 3*icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)  # Adjust position and size as needed
+        
+        closeIconButton = makeDefaultButton(closeIcon, closeApp)
+        closeIconButton.place(x=sys.scn_w - icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)
 # Footer Setup
 def updateFooter():
     global logoImageLabel
     global logoImage
     logoImage = PhotoImage(file=r'images/PTC_Logo.png')
-    resized_logoImage = logoImage.subsample(int(8 / (sys.scn_h / 400)))  # resizing image
+    resized_logoImage = logoImage.subsample(int(8 / (sys.scn_h / 800)))  # resizing image
     logoImageLabel = tk.Label(root, image=resized_logoImage, bg=sys.cMain, anchor='w')
     logoImageLabel.image = resized_logoImage  # Keep a reference to the image
     logoImageLabel.pack(side=tk.LEFT, anchor='w')
@@ -273,16 +279,23 @@ def timerScreen(vTimerOn = True):
 #OnScreen Time of day clock###############################
 
 def cornerClockDisplay():
+    cornerClock = clockLabel(back.getShortToday(), None, int(sys.scn_h / 32))
+    cornerClock.place(
+        x = sys.scn_w/2,
+        y = sys.scn_h/8,
+        width = sys.scn_w,
+        height = sys.scn_h/4
+        )
     def updateCornerClock():
         cornerClock.config(text=back.getShortToday())
         root.after(1000, updateCornerClock)  # Update every second
-        cornerClock.pack(side=tk.RIGHT, anchor='sw')
-    cornerClock = clockLabel(back.getShortToday(), None, int(sys.scn_h / 32))
+        
+    
     
     cornerClock.place(
-        x=sys.scn_w / 2,
-        y=sys.scn_h - sys.mainButton_h,
-        width=sys.scn_w / 2,
+        x=sys.scn_w-sys.scn_w/8,
+        y=sys.scn_h-sys.scn_h/8,
+        width=sys.scn_w / 8,
         height=sys.scn_h / 8
     )
     
@@ -294,7 +307,10 @@ def cornerClockDisplay():
 
     
 
-
+#Kill Program
+def closeApp():
+    confirmChoice('Exit PortaTrack Connect?',lambda: root.destroy(),lambda: mainMenuScreen())
+   
 
 ####################################################################################################
 # Start by showing the main menu screen
