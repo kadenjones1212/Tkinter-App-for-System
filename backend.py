@@ -99,7 +99,7 @@ def getToday():
      revisedDate = datetime.now().strftime("%c")
      return revisedDate
 def getShortToday():
-    revisedDate = datetime.now().strftime("%d/%m/%y\n%H:%M")
+    revisedDate = datetime.now().strftime("%d/%m/%y\n%I:%M %p")
     return revisedDate
 
             
