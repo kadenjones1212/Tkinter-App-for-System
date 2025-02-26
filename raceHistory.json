@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "runType": "race",
+    "runDistance": "5K",
+    "date": "Wed Feb 26 12:48:24 2025",
+    "events": [
+      {
+        "eventType": "runnerLap",
+        "runnerID": 4444,
+        "raceTime": "00:00:01.698"
+      },
+      {
+        "eventType": "runnerLap",
+        "runnerID": 4444,
+        "raceTime": "00:00:02.417"
+      },
+      {
+        "eventType": "runnerLap",
+        "runnerID": 2222,
+        "raceTime": "00:00:03.124"
+      }
+    ]
+  },
+  {
+    "runType": "race",
+    "runDistance": "5K",
+    "date": "Wed Feb 26 14:20:15 2025",
+    "events": []
+  }
+]
