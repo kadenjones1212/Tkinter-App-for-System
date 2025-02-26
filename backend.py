@@ -3,6 +3,7 @@ import datetime
 from datetime import datetime
 import systemVariables as sys
 import random as rand
+import json
 # Global variables to keep track of the timer state
 global elapsedTime, startTime, timerRunning
 elapsedTime = 0
@@ -26,6 +27,16 @@ def settingsRewrite(line,object):#Function to change settings
         data[line] = object
     with open('systemVariables.py', 'w') as file: 
         file.writelines(data) 
+        
+def importJSON(stuff):
+    with open(stuff,'r') as file:
+        data = json.load(file)
+        return(data)
+    
+def clearFile(file):
+    open(file, "w").close()
+
+clearFile('activeRace.json')
 
 #Settings Stuff#######################################
    
@@ -36,10 +47,17 @@ def startTimer():
     global startTime, finishTime, timerRunning, elapsedTime, pauseTimeOffset,timerTurnedOn
     elapsedTime = 0
     timerRunning = True
-    systemStartTime = f'{sys.raceDistance} RESUME | Date, {getToday()}\n'
+    
+    newRaceData = {
+        "runType" : sys.runType,
+        "runDistance": sys.runDistance,
+        "date" : getToday(),
+        "events":[]
+    }
+    writeToFile('activeRace.json',json.dumps(newRaceData,indent = 2))
+    
     #NEED TO CHANGE TO JSON
-    activeRaceFile = open("activeRace.json", "a")
-    activeRaceFile.write(systemStartTime)
+   
     startTime = time.perf_counter()
 
 def pullTimer():
@@ -49,24 +67,17 @@ def pullTimer():
 
 def stopButtonPressed(func):
     global startTime, finishTime, timerRunning, elapsedTime, pauseTimeOffset, timerTurnedOn
-    #writeToFile('activeRace.json',f'{sys.raceDistance} PAUSED | RaceTime, {rawTimeConvert()} | Date, {getToday()}\n')
+    
     #NEED TO CHANGE TO JSON
     timerRunning = False
     finishTime = pullTimer()
     return func
 
-def resumeTimer(func):
-    global startTime, finishTime, timerRunning, elapsedTime, pauseTimeOffset
-    pauseTimeOffset = time.perf_counter()- (startTime + finishTime)
-    return func
+
     
 
 #Active Race Management#######################################################
 def rawTimeConvert(): 
-#Used AI to make converter this since I didn't want to do the math. 
-# Just simple stuff that I COULD have done, but was tedious, so I just was lazy 
-# and had AI do the dirty work. This is the only section of code that wasn't written
-# entirely by me.
         rawTime = pullTimer()
         milliseconds = int((rawTime % 1) * 1000)
         seconds = int(rawTime) % 60
@@ -94,41 +105,47 @@ def getShortToday():
             
     
         
-def lap():#System Lap
-    writeToFile('activeRace.json',f'SystemLap | LapTime, {rawTimeConvert()} | Date, {getToday()}\n')
-    #NEED TO CHANGE TO JSON
+
+    
     
 def runnerRecord(id,format):#Mark Lap or Finish time of a runner
-    if format == 'Lap':
-        writeToFile('activeRace.json',f'RunnerLap: {id} | LapTime, {rawTimeConvert()} | Date, {getToday()}\n')
-        #NEED TO CHANGE TO JSON
-    elif format == 'Finish':
-        writeToFile('activeRace.json',f'RunnerEnd: {id} | EndTime, {rawTimeConvert()} | Date, {getToday()}\n')
-        #NEED TO CHANGE TO JSON
+    lapEvent = {
+        "eventType": "runnerLap" if format == 'runnerLap' else "runnerEnd",
+        "runnerID": id,
+        "raceTime": rawTimeConvert(),
+    }
+    with open('activeRace.json', 'r') as file:
+        activeRaceFile = json.load(file)
+    activeRaceFile["events"].append(lapEvent)
+    with open('activeRace.json', 'w') as file:
+        json.dump(activeRaceFile, file, indent=2)
 #Close the file after race is over
 
+def lap():#System Lap
+    # lapEvent = {"eventType":"systemLap","raceTime":rawTimeConvert(),"date":getToday()}
+    # with open('activeRace.json','r') as file:
+    #     activeRaceFile = json.load(file)
+    # activeRaceFile["events"].append(lapEvent)
+    # with open('activeRace.json','w') as file:
+    #     json.dump(activeRaceFile, file, indent = 2)
+    runnerRecord(rand.choice([1111,2222,3333,4444,5555,6666,7777,8888]),"runnerLap")#Only for debugging purposes
+    
 def saveButtonPressed(func):
-    writeToFile('activeRace.json',
-                f'{sys.raceDistance} END | EndTime, {rawTimeConvertOther(finishTime)} | Date, {getToday()}',
-                True
-                )
-    #NEED TO CHANGE TO JSON
-    constructRaceResults()
+    try:
+        activeRace = json.load(open("activeRace.json"))
+        raceHistory = json.load(open("raceHistory.json"))
+        raceHistory.append(activeRace)
+        json.dump(raceHistory, open("raceHistory.json", "w"), indent=2)
+        clearTempLog()
+        print("Save successful")
+    except Exception as e:
+        print(f"Error saving race data: {e}")
     return func
 
-def getLineInfo(stuff):#Remove vertical line and turn into list
-    thing = stuff.split('|')
-    return thing
 
 def clearTempLog():
     raceLog = open("activeRace.json", "w").close()#clear the active race for use next time
-def constructRaceResults():
-    raceLog = open("activeRace.json", "r")
-    raceText = raceLog.read()
-    raceLog.close()
-    writeToFile('raceHistory.txt',f'{raceText}\n\n',True)
-    #NEED TO CHANGE TO JSON
-    clearTempLog()
+
 
     
 

@@ -1,3 +1,4 @@
+#testing yay
 import tkinter as tk
 import systemVariables as sys
 import backend as back
@@ -8,7 +9,7 @@ from tkinter import PhotoImage
 root = tk.Tk()
 root.geometry(str(sys.scn_w) + 'x' + str(sys.scn_h))
 root.configure(bg=sys.cSecond)
-back.clearTempLog() #Clear the activeRace.txt on bootup to make sure no errors arise when logging a race
+back.clearTempLog() #Clear the activeRace.json on bootup to make sure no errors arise when logging a race
 root.resizable(False,False)
 def clearScreen():# Function to clear the screen by destroying all widgets
     for widget in root.winfo_children():
@@ -64,10 +65,18 @@ def makeDefaultButton(vtext, vcommand):
                      foreground=sys.cWhite,
                      activebackground=sys.cSecond,
                      activeforeground=sys.cWhite,
-                     borderwidth=sys.scn_h / 75,
+                     borderwidth=sys.scn_h / 150,
                      command=vcommand)
+def makeDefaultLabel(vtext):
+    return tk.Label(root,
+                    text=vtext,
+                    font=('Lexend', int(sys.scn_h / 25),'bold'),
+                    background=sys.cMain,
+                    foreground=sys.cWhite,
+                    borderwidth=0,
+                    )
 
-def clockLabel(vtext, vcommand,fontSize = int(sys.scn_w / 10)):
+def clockLabel(vtext,vcommand,fontSize = int(sys.scn_w / 10)):
     return tk.Label(root,
                      text = vtext,
                      #thingything
@@ -77,7 +86,7 @@ def clockLabel(vtext, vcommand,fontSize = int(sys.scn_w / 10)):
                      #activebackground=sys.cSecond,
                      activeforeground=sys.cWhite,
                      #borderwidth=sys.scn_h / 75,
-                     command=vcommand)
+                     )
 
 def makeColorButton(vtext,vcommand,vcolor):
     return tk.Button(root,
@@ -87,9 +96,18 @@ def makeColorButton(vtext,vcommand,vcolor):
                      foreground=sys.cWhite,
                      activebackground = vcolor,
                      activeforeground=sys.cWhite,
-                     borderwidth=sys.scn_h / 75,
+                     borderwidth=sys.scn_h / 150,
                      command=vcommand)
-
+    
+def confirmChoice(prompt,funcYes, funcNo):
+    promptLabel = makeDefaultLabel(prompt)
+    promptLabel.place(x=0, y=0, width=sys.scn_w, height=sys.scn_h*0.75)
+    yesButton = makeColorButton('Yes',lambda: funcYes(),'#ff0000')
+    yesButton.place(x=0, y=sys.center_y*1.5, width=sys.scn_w/4, height=sys.scn_h/4)
+    noButton = makeColorButton('No',lambda: funcNo(),'#00aa00')
+    noButton.place(x=sys.center_x*0.5, y=sys.center_y*1.5, width=sys.scn_w*.75, height=sys.scn_h/4)
+    
+    
 # Main Menu Screen####################################################################################################
 def mainMenuScreen():
     clearScreen()
@@ -128,13 +146,17 @@ def settingsScreen():
     settingsButton.place(x=0, y=sys.center_y - 1 * sys.mainButton_h, width=sys.scn_w, height=sys.mainButton_h)
     settingsButton = makeDefaultButton('Import Data',None)
     settingsButton.place(x=0, y=sys.center_y - 0 * sys.mainButton_h, width=sys.scn_w, height=sys.mainButton_h)
-    settingsButton = makeDefaultButton('Erase History',None)
+    settingsButton = makeDefaultButton('Erase History',lambda: confirmChoice('Erase History?',lambda: eraseHistory(),lambda: settingsScreen()))
     settingsButton.place(x=0, y=sys.center_y + 1 * sys.mainButton_h, width=sys.scn_w, height=sys.mainButton_h)
 
     saveSettingsButton = makeDefaultButton('Save Settings', None)
     saveSettingsButton.place(x = 0, y = sys.scn_h - sys.scn_h/8-sys.mainButton_h, width=sys.scn_w, height=sys.mainButton_h)
     cornerClockDisplay()
-    
+#Erase History#########################################################################################################
+def eraseHistory():
+    back.clearFile('raceHistory.json')
+    back.writeToFile('raceHistory.json','[]')
+    mainMenuScreen()
 # Race Select Screen####################################################################################################
 
 def raceSelectScreen():
@@ -162,10 +184,10 @@ def raceSelectScreen():
 
 def rScn(raceDist):
     clearScreen()
-    sys.raceDistance = raceDist
-    updateHeader(sys.raceDistance + ' Race')
+    sys.runDistance = raceDist
+    updateHeader(sys.runDistance + ' Race')
     updateFooter()
-    startButton = makeDefaultButton(f'{sys.raceDistance} Start', startTimer)
+    startButton = makeDefaultButton(f'{sys.runDistance} Start', startTimer)
     startButton.place(x=sys.center_x - sys.mainButton_w * 1.25 / 2, y=sys.center_y - sys.mainButton_h, width=sys.mainButton_w * 1.25, height=sys.mainButton_h * 2)
     cornerClockDisplay()
 
@@ -185,7 +207,13 @@ def trackSetup():
 
     dist3200Button = makeDefaultButton('3200m', lambda: rScn('3200m'))
     dist3200Button.place(x=sys.center_x - sys.mainButton_w / 2, y=sys.center_y + 1 * sys.mainButton_h, width=sys.mainButton_w, height=sys.mainButton_h)
-
+#Race History Screen###################################################################################################3
+def raceHistoryScreen():
+    clearScreen()
+    updateHeader('Race History')
+    updateFooter()
+    cornerClockDisplay()
+    
     
 #Cross Country Race ####################################################################################################
 
@@ -193,7 +221,7 @@ def startTimer():
     clearScreen()
     updateHeader('Timer Start',False)
     updateFooter()
-    startTimerButton = makeColorButton(f'BEGIN {sys.raceDistance} RACE',lambda: timerScreen(), 'Green')
+    startTimerButton = makeColorButton(f'BEGIN {sys.runDistance} RACE',lambda: timerScreen(), 'Green')
     startTimerButton.place(x=0, y=sys.scn_h/8, width=sys.scn_w, height=sys.scn_h*0.75-sys.scn_h/8)
     cancelButton = makeDefaultButton('Cancel',mainMenuScreen)
     cancelButton.place(x = 0, y = sys.scn_h - sys.scn_h/8-sys.scn_h/8, width=sys.scn_w, height=sys.scn_h/8)
@@ -217,16 +245,16 @@ def timerButtons(vOn):
     elif vOn == False:
         
         saveButton = makeDefaultButton('Save',lambda: back.saveButtonPressed(mainMenuScreen()))
-        saveButton.place(x=0, y=sys.scn_h-sys.scn_h/8-sys.mainButton_h*1.5, width=sys.scn_w/2, height=sys.mainButton_h * 1.5)
-        resumeButton = makeColorButton('Resume',lambda: back.resumeTimer(timerScreen(True)),'Green')
-        resumeButton.place(x=sys.center_x,y=sys.scn_h-sys.scn_h/8-sys.mainButton_h*1.5, width=sys.scn_w/2, height=sys.mainButton_h * 1.5)
+        saveButton.place(x=0, y=sys.scn_h-sys.scn_h/8-sys.mainButton_h*1.5, width=sys.scn_w, height=sys.mainButton_h * 1.5)
+        #resumeButton = makeColorButton('Resume',lambda: back.resumeTimer(timerScreen(True)),'Green')
+        #resumeButton.place(x=sys.center_x,y=sys.scn_h-sys.scn_h/8-sys.mainButton_h*1.5, width=sys.scn_w/2, height=sys.mainButton_h * 1.5)
 
 def timerScreen(vTimerOn = True):
     global displayClock
     clearScreen()
     if vTimerOn == True:
         back.startTimer()
-    updateHeader(sys.raceDistance + ' In Progress', False)
+    updateHeader(sys.runDistance + ' In Progress', False)
     updateFooter()
     cornerClockDisplay()
     displayClock = clockLabel(back.elapsedTime, None)
@@ -234,7 +262,7 @@ def timerScreen(vTimerOn = True):
         x = 0,
         y = sys.center_y - 2.5 * sys.mainButton_h,
         width = sys.scn_w,
-        height = sys.mainButton_h*2
+        height = sys.scn_h/4
         )
     if vTimerOn == True:
         timerButtons(True)
@@ -242,22 +270,24 @@ def timerScreen(vTimerOn = True):
         timerButtons(False)
     updateClock()
     
-    #OnScreen Time of day clock###############################
+#OnScreen Time of day clock###############################
+
 def cornerClockDisplay():
     def updateCornerClock():
         cornerClock.config(text=back.getShortToday())
         root.after(1000, updateCornerClock)  # Update every second
-
-    cornerClock = clockLabel(back.getShortToday(), None, int(sys.scn_h / 27))
+        cornerClock.pack(side=tk.RIGHT, anchor='sw')
+    cornerClock = clockLabel(back.getShortToday(), None, int(sys.scn_h / 32))
+    
     cornerClock.place(
         x=sys.scn_w / 2,
         y=sys.scn_h - sys.mainButton_h,
         width=sys.scn_w / 2,
         height=sys.scn_h / 8
     )
-    cornerClock.pack(side=tk.RIGHT, anchor='sw')
-    updateCornerClock()
     
+    updateCornerClock()
+#Review Race History Screen####################################################################################  
 
     
 
