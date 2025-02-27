@@ -137,5 +137,22 @@
     "runDistance": "5K",
     "date": "Thu Feb 27 17:28:20 2025",
     "events": []
+  },
+  {
+    "runType": "race",
+    "runDistance": "5K",
+    "date": "Thu Feb 27 18:15:20 2025",
+    "events": [
+      {
+        "eventType": "runnerLap",
+        "runnerID": 2222,
+        "raceTime": "00:00:01.422"
+      },
+      {
+        "eventType": "runnerLap",
+        "runnerID": 4444,
+        "raceTime": "00:00:01.981"
+      }
+    ]
   }
 ]
