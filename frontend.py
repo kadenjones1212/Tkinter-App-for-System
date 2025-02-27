@@ -1,4 +1,4 @@
-#testing yay
+#Last Updated 2/27/2025
 import tkinter as tk
 import systemVariables as sys
 import backend as back
@@ -61,7 +61,7 @@ def updateFooter():
     global logoImageLabel
     global logoImage
     logoImage = PhotoImage(file=r'images/PTC_Logo.png')
-    resized_logoImage = logoImage.subsample(int(8 / (sys.scn_h / 800)))  # resizing image
+    resized_logoImage = logoImage.subsample(int(8 / (sys.scn_h / 400)))  # resizing image
     logoImageLabel = tk.Label(root, image=resized_logoImage, bg=sys.cMain, anchor='w')
     logoImageLabel.image = resized_logoImage  # Keep a reference to the image
     logoImageLabel.pack(side=tk.LEFT, anchor='w')
