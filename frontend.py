@@ -78,10 +78,10 @@ def makeDefaultButton(vtext, vcommand):
                      activeforeground=sys.cWhite,
                      borderwidth=sys.scn_h / 150,
                      command=vcommand)
-def makeDefaultLabel(vtext):
+def makeDefaultLabel(vtext, vsize=int(sys.scn_h/25)):
     return tk.Label(root,
                     text=vtext,
-                    font=('Lexend', int(sys.scn_h / 25),'bold'),
+                    font=('Lexend', vsize,'bold'),
                     background=sys.cMain,
                     foreground=sys.cWhite,
                     borderwidth=0,
@@ -111,13 +111,16 @@ def makeColorButton(vtext,vcommand,vcolor):
                      command=vcommand)
     
 def confirmChoice(prompt,funcYes, funcNo):
-    promptLabel = makeDefaultLabel(prompt)
+    promptLabel = makeDefaultLabel(prompt,int(sys.scn_h/8))
     promptLabel.place(x=0, y=0, width=sys.scn_w, height=sys.scn_h*0.75)
     yesButton = makeColorButton('Yes',lambda: funcYes(),'#ff0000')
     yesButton.place(x=0, y=sys.center_y*1.5, width=sys.scn_w/4, height=sys.scn_h/4)
-    noButton = makeColorButton('No',lambda: funcNo(),'#00aa00')
+    noButton = makeColorButton('No',lambda: destroyYesNoScreen(),'#00aa00')
     noButton.place(x=sys.center_x*0.5, y=sys.center_y*1.5, width=sys.scn_w*.75, height=sys.scn_h/4)
-    
+    def destroyYesNoScreen():
+        yesButton.destroy()
+        promptLabel.destroy()
+        noButton.destroy()
     
 # Main Menu Screen####################################################################################################
 def mainMenuScreen():
@@ -251,7 +254,7 @@ def timerButtons(vOn):
     if vOn == True:
         lapButton = makeDefaultButton('Lap', lambda: back.lap())
         lapButton.place(x=0, y=sys.scn_h-sys.scn_h/8-sys.mainButton_h*1.5, width=sys.scn_w/(3/2), height=sys.mainButton_h * 1.5)
-        stopButton = makeColorButton('Stop', lambda: back.stopButtonPressed(timerScreen(False)), 'Red')
+        stopButton = makeColorButton('Stop', lambda: confirmChoice('End Race?',lambda: back.stopButtonPressed(timerScreen(False)),None), 'Red')
         stopButton.place(x=sys.scn_w*(2/3),y=sys.scn_h-sys.scn_h/8-sys.mainButton_h*1.5, width=sys.scn_w/3, height=sys.mainButton_h * 1.5)
     elif vOn == False:
         
@@ -271,7 +274,7 @@ def timerScreen(vTimerOn = True):
     displayClock = clockLabel(back.elapsedTime, None)
     displayClock.place(
         x = 0,
-        y = sys.center_y - 2.5 * sys.mainButton_h,
+        y = sys.scn_h /8,
         width = sys.scn_w,
         height = sys.scn_h/4
         )
@@ -314,7 +317,7 @@ def cornerClockDisplay():
 
 #Kill Program
 def closeApp():
-    confirmChoice('Exit PortaTrack Connect?',lambda: root.destroy(),lambda: mainMenuScreen())
+    confirmChoice('Exit\nPortaTrack\nConnect?',lambda: root.destroy(),lambda: mainMenuScreen())
    
 
 ####################################################################################################
