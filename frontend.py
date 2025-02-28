@@ -230,7 +230,7 @@ def raceHistoryScreen(page=0):
     downButton = makeDefaultButton('🡇',None,int(sys.scn_h/20),'#00aaaa')
     downButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/2, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
     if back.raceHistoryCount() < 6:
-        overflowMax = back.raceHistoryCount()
+        overflowMax = back.raceHistoryCount()#testing
     else:
         overflowMax = 6
     for i in range(0,overflowMax):#Construct List of Recent Races
