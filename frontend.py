@@ -4,13 +4,14 @@ import systemVariables as sys
 import backend as back
 import time
 from tkinter import PhotoImage
+import math
 
 # Initialize the main window
 root = tk.Tk()
 root.attributes('-fullscreen',True)
 back.settingsRewrite(0,f'scn_w = {root.winfo_screenwidth()}\n')
 back.settingsRewrite(1,f'scn_h = {root.winfo_screenheight()}\n')
-
+historyPage = 0#For viewing history
 
 root.geometry(str(sys.scn_w) + 'x' + str(sys.scn_h))
 
@@ -220,25 +221,48 @@ def trackSetup():
     dist3200Button = makeDefaultButton('3200m', lambda: rScn('3200m'))
     dist3200Button.place(x=sys.center_x - sys.mainButton_w / 2, y=sys.center_y + 1 * sys.mainButton_h, width=sys.mainButton_w, height=sys.mainButton_h)
 #Race History Screen Main Menu###################################################################################################3
-def raceHistoryScreen(page=0):
+def raceHistoryScreen(historyPage=0):
     clearScreen()
     updateHeader(f'Race History ({back.raceHistoryCount()} Races)')
     updateFooter()
     cornerClockDisplay()
-    upButton = makeDefaultButton('⇧',None,int(sys.scn_h/20),'#00aaaa')
+    upButton = makeDefaultButton('⇧',historyPageUp,int(sys.scn_h/20),'#00aaaa')
     upButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/8, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
-    downButton = makeDefaultButton('⇩',None,int(sys.scn_h/20),'#00aaaa')
+    downButton = makeDefaultButton('⇩',historyPageDown,int(sys.scn_h/20),'#00aaaa')
     downButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/2, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
-    if back.raceHistoryCount() < 6:
-        overflowMax = back.raceHistoryCount()#testing
-    else:
-        overflowMax = 6
-    for i in range(0,overflowMax):#Construct List of Recent Races
-        indexLabel = makeDefaultLabel(i+1,int(sys.scn_h/16))
-        indexLabel.place(x=0, y=sys.scn_h/8+sys.scn_h/8*i, width=sys.scn_w/16, height=sys.mainButton_h)
-        recentRaceButton = makeDefaultButton(f"{back.getObjectFromJSON('raceHistory.json', i, 'runDistance')} - {back.getObjectFromJSON('raceHistory.json', i, 'date')}", None, int(sys.scn_h / 25))
+    
+    for i in range(6):  # Construct List of Recent Races
+        
+        raceIndex = historyPage * 6 + i
+        raceTitle = f"{back.getObjectFromJSON('raceHistory.json', raceIndex, 'runDistance')} - {back.getObjectFromJSON('raceHistory.json', raceIndex, 'date')}"
+        if raceIndex < back.raceHistoryCount():
+            indexLabel = makeDefaultLabel(raceIndex + 1, int(sys.scn_h / 16))
+            indexLabel.place(x=0, y=sys.scn_h / 8 + sys.scn_h / 8 * i, width=sys.scn_w / 16, height=sys.mainButton_h)
+        recentRaceButton = makeDefaultButton(raceTitle, lambda raceIndex=raceIndex: raceViewScreen(raceIndex), int(sys.scn_h / 25))
+        recentRaceButton.place(x=sys.scn_w / 16, y=sys.scn_h / 8 + sys.scn_h / 8 * i, width=sys.scn_w - sys.scn_w / 8, height=sys.mainButton_h)
 
-        recentRaceButton.place(x=sys.scn_w/16, y=sys.scn_h/8+sys.scn_h/8*i, width=sys.scn_w-sys.scn_w/8, height=sys.mainButton_h)
+def getRaceTitle(index):
+    return f"{back.getObjectFromJSON('raceHistory.json', index, 'runDistance')} - {back.getObjectFromJSON('raceHistory.json', index, 'date')}"
+
+def historyPageUp():
+    global historyPage
+    if historyPage == 0:
+        None
+    else:
+        historyPage = historyPage-1
+        raceHistoryScreen(historyPage)
+        
+def historyPageDown():
+    global historyPage
+    if (historyPage + 1) * 6 < back.raceHistoryCount():
+        historyPage += 1
+        raceHistoryScreen(historyPage)
+
+def raceViewScreen(index):
+    clearScreen()
+    updateHeader(f'{getRaceTitle(index)}')
+    updateFooter()
+    cornerClockDisplay()
     
 #Cross Country Race ####################################################################################################
 
