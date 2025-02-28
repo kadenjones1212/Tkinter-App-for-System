@@ -225,9 +225,9 @@ def raceHistoryScreen(page=0):
     updateHeader(f'Race History ({back.raceHistoryCount()} Races)')
     updateFooter()
     cornerClockDisplay()
-    upButton = makeDefaultButton('🡅',None,int(sys.scn_h/20),'#00aaaa')
+    upButton = makeDefaultButton('⇧',None,int(sys.scn_h/20),'#00aaaa')
     upButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/8, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
-    downButton = makeDefaultButton('🡇',None,int(sys.scn_h/20),'#00aaaa')
+    downButton = makeDefaultButton('⇩',None,int(sys.scn_h/20),'#00aaaa')
     downButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/2, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
     if back.raceHistoryCount() < 6:
         overflowMax = back.raceHistoryCount()#testing
@@ -236,7 +236,8 @@ def raceHistoryScreen(page=0):
     for i in range(0,overflowMax):#Construct List of Recent Races
         indexLabel = makeDefaultLabel(i+1,int(sys.scn_h/16))
         indexLabel.place(x=0, y=sys.scn_h/8+sys.scn_h/8*i, width=sys.scn_w/16, height=sys.mainButton_h)
-        recentRaceButton = makeDefaultButton(f'{back.getObjectFromJSON('raceHistory.json',i,'runDistance')} - {back.getObjectFromJSON('raceHistory.json',i,'date')}',None,int(sys.scn_h/25))
+        recentRaceButton = makeDefaultButton(f"{back.getObjectFromJSON('raceHistory.json', i, 'runDistance')} - {back.getObjectFromJSON('raceHistory.json', i, 'date')}", None, int(sys.scn_h / 25))
+
         recentRaceButton.place(x=sys.scn_w/16, y=sys.scn_h/8+sys.scn_h/8*i, width=sys.scn_w-sys.scn_w/8, height=sys.mainButton_h)
     
 #Cross Country Race ####################################################################################################
