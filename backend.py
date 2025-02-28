@@ -14,6 +14,12 @@ pauseTimeOffset = 0
 timerTurnedOn = False
 
 #General Stuff
+def importJSON(stuff):
+    with open(stuff,'r') as file:
+        data = json.load(file)
+        return(data)
+def getObjectFromJSON(file,line,data):
+    return importJSON(file)[line][data]
 
 def writeToFile(file,content,close = False):
     fileToEdit = open(file,'a')
@@ -32,7 +38,7 @@ def importJSON(stuff):
     with open(stuff,'r') as file:
         data = json.load(file)
         return(data)
-    
+
 def clearFile(file):
     open(file, "w").close()
 
@@ -134,7 +140,7 @@ def saveButtonPressed(func):
     try:
         activeRace = json.load(open("activeRace.json"))
         raceHistory = json.load(open("raceHistory.json"))
-        raceHistory.append(activeRace)
+        raceHistory.insert(0, activeRace)  # Insert at the beginning of the list
         json.dump(raceHistory, open("raceHistory.json", "w"), indent=2)
         clearTempLog()
         print("Save successful")
@@ -145,8 +151,15 @@ def saveButtonPressed(func):
 
 def clearTempLog():
     raceLog = open("activeRace.json", "w").close()#clear the active race for use next time
-
-
+    
+#Race History Viewing###################################################################
+def raceHistoryCount():
+    history = importJSON('raceHistory.json')
+    count = 0
+    for i in history:
+        count = count+1
+    return count
+    
     
 
 

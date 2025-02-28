@@ -68,17 +68,17 @@ def updateFooter():
     logoImageLabel.place(x=0, y=sys.scn_h - sys.scn_h / 8, width=sys.scn_w, height=sys.scn_h / 8)  # Adjust height as needed
 
 # Function to create default buttons
-def makeDefaultButton(vtext, vcommand):
+def makeDefaultButton(vtext, vcommand, vsize=int(sys.scn_h / 25),color = sys.cMain):
     return tk.Button(root,
                      text=vtext,
-                     font=('Lexend', int(sys.scn_h / 25),'bold'),
-                     background=sys.cMain,
+                     font=('Lexend',vsize ,'bold'),
+                     background=color,
                      foreground=sys.cWhite,
                      activebackground=sys.cSecond,
                      activeforeground=sys.cWhite,
                      borderwidth=sys.scn_h / 150,
                      command=vcommand)
-def makeDefaultLabel(vtext, vsize=int(sys.scn_h/25)):
+def makeDefaultLabel(vtext, vsize=int(sys.scn_h/25),):
     return tk.Label(root,
                     text=vtext,
                     font=('Lexend', vsize,'bold'),
@@ -90,11 +90,9 @@ def makeDefaultLabel(vtext, vsize=int(sys.scn_h/25)):
 def clockLabel(vtext,vcommand,fontSize = int(sys.scn_w / 10)):
     return tk.Label(root,
                      text = vtext,
-                     #thingything
                      font=('Consolas', fontSize,'bold'),
                      background=sys.cMain,
                      foreground=sys.cWhite,
-                     #activebackground=sys.cSecond,
                      activeforeground=sys.cWhite,
                      #borderwidth=sys.scn_h / 75,
                      )
@@ -133,7 +131,7 @@ def mainMenuScreen():
     startRaceButton.place(x=sys.center_x - sys.mainButton_w / 2, y=sys.center_y - 2 * sys.mainButton_h, width=sys.mainButton_w, height=sys.mainButton_h)
 
     # History button
-    historyButton = makeDefaultButton('Race History', None)
+    historyButton = makeDefaultButton('Race History', raceHistoryScreen)
     historyButton.place(x=sys.center_x - sys.mainButton_w / 2, y=sys.center_y - 2 * sys.mainButton_h / 2, width=sys.mainButton_w, height=sys.mainButton_h)
 
     # Calibrate button
@@ -221,13 +219,25 @@ def trackSetup():
 
     dist3200Button = makeDefaultButton('3200m', lambda: rScn('3200m'))
     dist3200Button.place(x=sys.center_x - sys.mainButton_w / 2, y=sys.center_y + 1 * sys.mainButton_h, width=sys.mainButton_w, height=sys.mainButton_h)
-#Race History Screen###################################################################################################3
-def raceHistoryScreen():
+#Race History Screen Main Menu###################################################################################################3
+def raceHistoryScreen(page=0):
     clearScreen()
-    updateHeader('Race History')
+    updateHeader(f'Race History ({back.raceHistoryCount()} Races)')
     updateFooter()
     cornerClockDisplay()
-    
+    upButton = makeDefaultButton('🡅',None,int(sys.scn_h/20),'#00aaaa')
+    upButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/8, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
+    downButton = makeDefaultButton('🡇',None,int(sys.scn_h/20),'#00aaaa')
+    downButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/2, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
+    if back.raceHistoryCount() < 6:
+        overflowMax = back.raceHistoryCount()
+    else:
+        overflowMax = 6
+    for i in range(0,overflowMax):#Construct List of Recent Races
+        indexLabel = makeDefaultLabel(i+1,int(sys.scn_h/16))
+        indexLabel.place(x=0, y=sys.scn_h/8+sys.scn_h/8*i, width=sys.scn_w/16, height=sys.mainButton_h)
+        recentRaceButton = makeDefaultButton(f'{back.getObjectFromJSON('raceHistory.json',i,'runDistance')} - {back.getObjectFromJSON('raceHistory.json',i,'date')}',None,int(sys.scn_h/25))
+        recentRaceButton.place(x=sys.scn_w/16, y=sys.scn_h/8+sys.scn_h/8*i, width=sys.scn_w-sys.scn_w/8, height=sys.mainButton_h)
     
 #Cross Country Race ####################################################################################################
 
@@ -307,13 +317,7 @@ def cornerClockDisplay():
         height=sys.scn_h / 8
     )
     
-    updateCornerClock()
-#Review Race History Screen####################################################################################  
-
-    
-
-
-    
+    updateCornerClock() 
 
 #Kill Program
 def closeApp():
