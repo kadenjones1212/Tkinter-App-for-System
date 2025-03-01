@@ -49,13 +49,13 @@ def updateHeader(vtext,boolIcons = True):
     closeIcon = '✖'
     icon_size = int(sys.scn_h / 10)  # Same size as the current main title
     if boolIcons == True:
-        settingsIconButton = makeDefaultButton(settingsIcon, settingsScreen)
+        settingsIconButton = makeDefaultButton(settingsIcon, settingsScreen,int(sys.scn_h / 25),'#666666','#333333')
         settingsIconButton.place(x=sys.scn_w - 2*icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)  # Adjust position and size as needed
 
-        homeIconButton = makeDefaultButton(homeIcon, mainMenuScreen)
+        homeIconButton = makeDefaultButton(homeIcon, mainMenuScreen,int(sys.scn_h / 25),'#007777','#004444')
         homeIconButton.place(x=sys.scn_w - 3*icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)  # Adjust position and size as needed
         
-        closeIconButton = makeDefaultButton(closeIcon, closeApp)
+        closeIconButton = makeDefaultButton(closeIcon, closeApp,int(sys.scn_h / 25),'#ff0000','#aa0000')
         closeIconButton.place(x=sys.scn_w - icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)
 # Footer Setup
 def updateFooter():
@@ -69,13 +69,13 @@ def updateFooter():
     logoImageLabel.place(x=0, y=sys.scn_h - sys.scn_h / 8, width=sys.scn_w, height=sys.scn_h / 8)  # Adjust height as needed
 
 # Function to create default buttons
-def makeDefaultButton(vtext, vcommand, vsize=int(sys.scn_h / 25),color = sys.cMain):
+def makeDefaultButton(vtext, vcommand, vsize=int(sys.scn_h / 25),color = sys.cMain,clickColor = sys.cSecond):
     return tk.Button(root,
                      text=vtext,
                      font=('Lexend',vsize ,'bold'),
                      background=color,
                      foreground=sys.cWhite,
-                     activebackground=sys.cSecond,
+                     activebackground=clickColor,
                      activeforeground=sys.cWhite,
                      borderwidth=sys.scn_h / 150,
                      command=vcommand)
@@ -201,7 +201,7 @@ def rScn(raceDist):
     updateHeader(sys.runDistance + ' Race')
     updateFooter()
     startButton = makeDefaultButton(f'{sys.runDistance} Start', startTimer)
-    startButton.place(x=sys.center_x - sys.mainButton_w * 1.25 / 2, y=sys.center_y - sys.mainButton_h, width=sys.mainButton_w * 1.25, height=sys.mainButton_h * 2)
+    startButton.place(x=sys.center_x - sys.mainButton_w * 1.25 / 2, y=sys.center_y - sys.mainButton_h*2, width=sys.mainButton_w * 1.25, height=sys.mainButton_h * 4)
     cornerClockDisplay()
 
 def trackSetup(): 
@@ -226,9 +226,9 @@ def raceHistoryScreen(historyPage=0):
     updateHeader(f'Race History ({back.raceHistoryCount()} Races)')
     updateFooter()
     cornerClockDisplay()
-    upButton = makeDefaultButton('⇧',historyPageUp,int(sys.scn_h/20),'#00aaaa')
+    upButton = makeDefaultButton('⇧',historyPageUp,int(sys.scn_h/20),'#007777','#007777')
     upButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/8, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
-    downButton = makeDefaultButton('⇩',historyPageDown,int(sys.scn_h/20),'#00aaaa')
+    downButton = makeDefaultButton('⇩',historyPageDown,int(sys.scn_h/20),'#007777','#007777')
     downButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/2, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
     
     for i in range(6):  # Construct List of Recent Races
