@@ -1,7 +1,3 @@
 #!/bin/bash
-
-# Change directory to the folder where run.sh is located
-cd /home/kthej/Desktop/Tkinter-App-for-System/
-
-# Run the Python script frontend.py
+cd /home/kthej/Documents/GitHub/Tkinter-App-for-System/
 python3 frontend.py
