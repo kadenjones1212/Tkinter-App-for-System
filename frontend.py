@@ -12,10 +12,9 @@ root.attributes('-fullscreen',True)
 back.settingsRewrite(0,f'scn_w = {root.winfo_screenwidth()}\n')
 back.settingsRewrite(1,f'scn_h = {root.winfo_screenheight()}\n')
 historyPage = 0#For viewing history
-
 root.geometry(str(sys.scn_w) + 'x' + str(sys.scn_h))
-
 root.configure(bg=sys.cSecond)
+root.config(cursor=None)
 back.clearTempLog() #Clear the activeRace.json on bootup to make sure no errors arise when logging a race
 #root.resizable(False,False)
 def clearScreen():# Function to clear the screen by destroying all widgets
@@ -88,7 +87,7 @@ def makeDefaultLabel(vtext, vsize=int(sys.scn_h/25),):
                     borderwidth=0,
                     )
 
-def clockLabel(vtext,vcommand,fontSize = int(sys.scn_w / 10)):
+def clockLabel(vtext,vcommand,fontSize = int(sys.scn_w / 7)):
     return tk.Label(root,
                      text = vtext,
                      font=('Consolas', fontSize,'bold'),
@@ -311,7 +310,7 @@ def timerScreen(vTimerOn = True):
         x = 0,
         y = sys.scn_h /8,
         width = sys.scn_w,
-        height = sys.scn_h/4
+        height = sys.scn_h/2
         )
     if vTimerOn == True:
         timerButtons(True)

@@ -89,7 +89,7 @@ def rawTimeConvert():
         seconds = int(rawTime) % 60
         minutes = (int(rawTime) // 60) % 60
         hours = int(rawTime) // 3600
-        convertedTime = f"{hours:02}:{minutes:02}:{seconds:02}.{milliseconds:03}"
+        convertedTime = f"{hours:01}:{minutes:01}:{seconds:02}.{milliseconds:03}"
         return convertedTime
 
 def rawTimeConvertOther(rawTime): #Same function but converts any input
