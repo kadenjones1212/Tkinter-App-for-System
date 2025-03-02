@@ -87,7 +87,7 @@ def makeDefaultLabel(vtext, vsize=int(sys.scn_h/25),):
                     borderwidth=0,
                     )
 
-def clockLabel(vtext,vcommand,fontSize = int(sys.scn_w / 7)):
+def clockLabel(vtext,vcommand,fontSize = int(sys.scn_w / 10)):
     return tk.Label(root,
                      text = vtext,
                      font=('Consolas', fontSize,'bold'),

@@ -85,17 +85,17 @@ def stopButtonPressed(func):
 #Active Race Management#######################################################
 def rawTimeConvert(): 
     rawTime = pullTimer()
-    milliseconds = int((rawTime % 1) * 1000)
+    milliseconds = int((rawTime % 1) * 10)  # Convert to .1 of a second
     seconds = int(rawTime) % 60
     minutes = (int(rawTime) // 60) % 60
     hours = int(rawTime) // 3600
     
     if hours > 0:
-        convertedTime = f"{hours}:{minutes:02}:{seconds:02}.{milliseconds:03}"
+        convertedTime = f"{hours}:{minutes:02}:{seconds:02}.{milliseconds}"
     elif minutes > 0:
-        convertedTime = f"{minutes}:{seconds:02}.{milliseconds:03}"
+        convertedTime = f"{minutes}:{seconds:02}.{milliseconds}"
     else:
-        convertedTime = f"{seconds}.{milliseconds:03}"
+        convertedTime = f"{seconds}.{milliseconds}"
     
     return convertedTime
 
