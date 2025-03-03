@@ -33,7 +33,7 @@ def settingsRewrite(line,object):#Function to change settings
         data[line] = object
     with open('systemVariables.py', 'w') as file: 
         file.writelines(data) 
-        
+    
 def importJSON(stuff):
     with open(stuff,'r') as file:
         data = json.load(file)
@@ -141,14 +141,16 @@ def lap():#System Lap
     # activeRaceFile["events"].append(lapEvent)
     # with open('activeRace.json','w') as file:
     #     json.dump(activeRaceFile, file, indent = 2)
-    runnerRecord(rand.choice([1111,2222,3333,4444,5555,6666,7777,8888]),"runnerLap")#Only for debugging purposes
+    runnerRecord(rand.choice([1111,2222,3333,4444,5555,6666,7777,8888]),"runnerEnd")#Only for debugging purposes
     
 def saveButtonPressed(func):
     try:
         activeRace = json.load(open("activeRace.json"))
+        
         raceHistory = json.load(open("raceHistory.json"))
         raceHistory.insert(0, activeRace)  # Insert at the beginning of the list
         json.dump(raceHistory, open("raceHistory.json", "w"), indent=2)
+        
         clearTempLog()
         print("Save successful")
     except Exception as e:
@@ -166,8 +168,37 @@ def raceHistoryCount():
     for i in history:
         count = count+1
     return count
+
+def getRaceTitle(index):
+    return f"{getObjectFromJSON('raceHistory.json', index, 'runDistance')}, {getObjectFromJSON('raceHistory.json', index, 'date')}"
+
+def getRaceDistance(index):
+    return f"{getObjectFromJSON('raceHistory.json', index, 'runDistance')}"
+
+def getEventsByRunnerID(raceIndex, runnerID):
+    events = getObjectFromJSON('raceHistory.json', raceIndex, 'events')
+    runnerEvents = [event for event in events if event['runnerID'] == runnerID]
+    return runnerEvents
+
+def getRunnerFinishTime(raceIndex, runnerID):
+    events = getEventsByRunnerID(raceIndex, runnerID)
+    for event in events:
+        if event["eventType"] == "runnerEnd":
+            return event["raceTime"]
     
+def getNumberOfRunners(index):
+    events = getObjectFromJSON('raceHistory.json',index,"events")
+    for i in events:
+        unique_runners = set()
+        for event in events:
+            unique_runners.add(event["runnerID"])
+        return len(unique_runners)
     
+def getRunnerEvent(index):
+    events = getObjectFromJSON('raceHistory.json',index,"events")
+    return events[index]
+
+
 
 
     

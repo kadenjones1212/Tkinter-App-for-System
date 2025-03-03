@@ -12,6 +12,7 @@ root.attributes('-fullscreen',True)
 back.settingsRewrite(0,f'scn_w = {root.winfo_screenwidth()}\n')
 back.settingsRewrite(1,f'scn_h = {root.winfo_screenheight()}\n')
 historyPage = 0#For viewing history
+raceResultPage = 0
 root.geometry(str(sys.scn_w) + 'x' + str(sys.scn_h))
 root.configure(bg=sys.cSecond)
 root.config(cursor=None)
@@ -37,25 +38,21 @@ def updateHeader(vtext,boolIcons = True):
     headerTitle.config(text=root.title())
 
     global settingsIconButton
-    global settingsIcon
     global homeIconButton
-    global homeIcon
     global closeIconButton
-    global closeIcon
-
-    settingsIcon = '⚙️'
-    homeIcon = '⌂'
-    closeIcon = '✖'
     icon_size = int(sys.scn_h / 10)  # Same size as the current main title
     if boolIcons == True:
-        settingsIconButton = makeDefaultButton(settingsIcon, settingsScreen,int(sys.scn_h / 25),'#666666','#333333')
-        settingsIconButton.place(x=sys.scn_w - 2*icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)  # Adjust position and size as needed
+        settingsIconButton = makeDefaultButton('⚙️', settingsScreen,int(sys.scn_h / 25),'#666666','#333333')
+        settingsIconButton.place(x=sys.scn_w - 2*icon_size, y=0, width=icon_size, height=icon_size)  # Adjust position and size as needed
 
-        homeIconButton = makeDefaultButton(homeIcon, mainMenuScreen,int(sys.scn_h / 25),'#007777','#004444')
-        homeIconButton.place(x=sys.scn_w - 3*icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)  # Adjust position and size as needed
+        homeIconButton = makeDefaultButton('⌂', mainMenuScreen,int(sys.scn_h / 25),'#007777','#004444')
+        homeIconButton.place(x=sys.scn_w - 3*icon_size, y=0, width=icon_size, height=icon_size)  # Adjust position and size as needed
         
-        closeIconButton = makeDefaultButton(closeIcon, closeApp,int(sys.scn_h / 25),'#ff0000','#aa0000')
-        closeIconButton.place(x=sys.scn_w - icon_size - int(sys.scn_h / 80), y=(topHeader_h - icon_size) / 2, width=icon_size, height=icon_size)
+        closeIconButton = makeDefaultButton('✖', closeApp,int(sys.scn_h / 25),'#ff0000','#aa0000')
+        closeIconButton.place(x=sys.scn_w - icon_size, y=0, width=icon_size, height=icon_size)
+    
+        
+
 # Footer Setup
 def updateFooter():
     global logoImageLabel
@@ -78,13 +75,14 @@ def makeDefaultButton(vtext, vcommand, vsize=int(sys.scn_h / 25),color = sys.cMa
                      activeforeground=sys.cWhite,
                      borderwidth=sys.scn_h / 150,
                      command=vcommand)
-def makeDefaultLabel(vtext, vsize=int(sys.scn_h/25),):
+def makeDefaultLabel(vtext, vsize=int(sys.scn_h/25),anchor=None,color=sys.cMain):
     return tk.Label(root,
                     text=vtext,
                     font=('Lexend', vsize,'bold'),
-                    background=sys.cMain,
+                    background=color,
                     foreground=sys.cWhite,
                     borderwidth=0,
+                    anchor = anchor
                     )
 
 def clockLabel(vtext,vcommand,fontSize = int(sys.scn_w / 10)):
@@ -225,6 +223,7 @@ def raceHistoryScreen(historyPage=0):
     updateHeader(f'Race History ({back.raceHistoryCount()} Races)')
     updateFooter()
     cornerClockDisplay()
+    
     upButton = makeDefaultButton('⇧',historyPageUp,int(sys.scn_h/20),'#007777','#007777')
     upButton.place(x=sys.scn_w- sys.scn_w/16, y=sys.scn_h/8, width=sys.scn_w/16, height=sys.scn_h/4*1.5)
     downButton = makeDefaultButton('⇩',historyPageDown,int(sys.scn_h/20),'#007777','#007777')
@@ -237,11 +236,8 @@ def raceHistoryScreen(historyPage=0):
         if raceIndex < back.raceHistoryCount():
             indexLabel = makeDefaultLabel(raceIndex + 1, int(sys.scn_h / 16))
             indexLabel.place(x=0, y=sys.scn_h / 8 + sys.scn_h / 8 * i, width=sys.scn_w / 16, height=sys.mainButton_h)
-        recentRaceButton = makeDefaultButton(raceTitle, lambda raceIndex=raceIndex: raceViewScreen(raceIndex), int(sys.scn_h / 25))
+        recentRaceButton = makeDefaultButton(raceTitle, lambda raceIndex=raceIndex: raceViewEndTimesScreen(raceIndex), int(sys.scn_h / 25))
         recentRaceButton.place(x=sys.scn_w / 16, y=sys.scn_h / 8 + sys.scn_h / 8 * i, width=sys.scn_w - sys.scn_w / 8, height=sys.mainButton_h)
-
-def getRaceTitle(index):
-    return f"{back.getObjectFromJSON('raceHistory.json', index, 'runDistance')} - {back.getObjectFromJSON('raceHistory.json', index, 'date')}"
 
 def historyPageUp():
     global historyPage
@@ -256,12 +252,84 @@ def historyPageDown():
     if (historyPage + 1) * 6 < back.raceHistoryCount():
         historyPage += 1
         raceHistoryScreen(historyPage)
+        
+#Viewing Individual Race Screen###########################################################
+def raceResultPageUp(raceIndex):
+    global raceResultPage
+    if raceResultPage == 0:
+        None
+    else:
+        raceResultPage = raceResultPage - 1
+        raceViewEndTimesScreen(raceIndex)
 
-def raceViewScreen(index):
+def raceResultPageDown(raceIndex):
+    global raceResultPage
+    if (raceResultPage + 1) * 6 < back.getNumberOfRunners(raceIndex):
+        raceResultPage = raceResultPage + 1
+        raceViewEndTimesScreen(raceIndex)
+    
+#View Race End times##############################################################################
+def raceViewEndTimesScreen(raceIndex):
     clearScreen()
-    updateHeader(f'{getRaceTitle(index)}')
+    updateHeader(f'Results:  {back.getRaceTitle(raceIndex)}')
     updateFooter()
     cornerClockDisplay()
+    
+    upButton = makeDefaultButton('⇧', lambda: raceResultPageUp(raceIndex), int(sys.scn_h / 20), '#007777', '#007777')
+    upButton.place(x=sys.scn_w - sys.scn_w / 16, y=sys.scn_h / 8, width=sys.scn_w / 16, height=sys.scn_h / 4 * 1.5)
+    downButton = makeDefaultButton('⇩', lambda: raceResultPageDown(raceIndex), int(sys.scn_h / 20), '#007777', '#007777')
+    downButton.place(x=sys.scn_w - sys.scn_w / 16, y=sys.scn_h / 2, width=sys.scn_w / 16, height=sys.scn_h / 4 * 1.5)
+
+    spacing = sys.scn_h/16+sys.scn_h/64
+    resultsPerScreen = 8
+    rowHeight = sys.scn_h/16
+    bgLine = makeDefaultLabel(None,1,None,sys.cMain)
+    bgLine.place(x=0, y=sys.scn_h / 8 , width=sys.scn_w-sys.scn_w/16, height=sys.scn_h/16)
+
+    indexTitleLabel = makeDefaultLabel('#', int(sys.scn_h / 32))
+    indexTitleLabel.place(x=0, y=sys.scn_h / 8 + sys.scn_h/16 + spacing * -1, width=sys.scn_w / 16, height=rowHeight)
+    runnerIDLabel = makeDefaultLabel('Runner',int(sys.scn_h / 32))
+    runnerIDLabel.place(x=sys.scn_w / 8, y=sys.scn_h / 8  + sys.scn_h/16+ spacing *-1, width=sys.scn_w / 8, height=rowHeight)
+    raceTimeLabel = makeDefaultLabel('Time',int(sys.scn_h / 32))
+    raceTimeLabel.place(x=sys.scn_w / 4 +sys.scn_w/16, y=sys.scn_h / 8 + sys.scn_h/16+ spacing * -1, width=sys.scn_w / 4, height=rowHeight)
+    horizLine = makeDefaultLabel(None,1,None,'Black')
+    horizLine.place(x=0, y=sys.scn_h / 8+sys.scn_h/32+sys.scn_h/64 , width=sys.scn_w-sys.scn_w/16, height=sys.scn_h/32)
+    
+    raceEvents = back.getObjectFromJSON('raceHistory.json',raceIndex,'events')
+    raceFinishEvents = [event for event in raceEvents if event['eventType'] == 'runnerEnd']
+    for i in range(resultsPerScreen):
+        runnerIndex = raceResultPage * resultsPerScreen + i
+        if runnerIndex < back.getNumberOfRunners(raceIndex):
+            
+            placementID = f"{raceFinishEvents[runnerIndex]['runnerID']}"
+            placementTime = f'{raceFinishEvents[runnerIndex]['raceTime']}'
+            
+            indexLabel = makeDefaultLabel(runnerIndex + 1, int(sys.scn_h / 18))
+            indexLabel.place(x=0, y=sys.scn_h / 8 + sys.scn_h/16 +sys.scn_h/32 + spacing * i, width=sys.scn_w / 16, height=rowHeight)
+           
+            recentRaceID = makeDefaultLabel(placementID, int(sys.scn_h / 25))
+            recentRaceID.place(x=sys.scn_w / 8, y=sys.scn_h / 8 +sys.scn_h/32 + sys.scn_h/16+ spacing * i, width=sys.scn_w / 8, height=rowHeight)
+            
+            placementTimeLabel = makeDefaultLabel(placementTime, int(sys.scn_h / 25))
+            placementTimeLabel.place(x=sys.scn_w / 4 +sys.scn_w/16, y=sys.scn_h / 8  +sys.scn_h/32+ sys.scn_h/16+ spacing * i, width=sys.scn_w / 4, height=rowHeight)
+            
+            detailedRunnerStatButton = makeDefaultButton("Stats", lambda runner=runnerIndex: viewDetailedRunnerStats(raceIndex, raceFinishEvents[runner]["runnerID"]), int(sys.scn_h / 25), 'Black')
+            detailedRunnerStatButton.place(x=sys.scn_w -sys.scn_w/16-sys.scn_w/8, y=sys.scn_h / 8  +sys.scn_h/32+ sys.scn_h/16+ spacing * i, width=sys.scn_w / 8, height=rowHeight)
+            
+    def viewDetailedRunnerStats(raceIndex,runner):
+        clearScreen()
+        updateHeader(f'Runner {runner} | {back.getRaceDistance(raceIndex)}')
+        updateFooter()
+        cornerClockDisplay()
+        placement = 1
+        for event in raceFinishEvents:
+            if event['runnerID'] == runner:
+                break
+            placement += 1
+        finishTimeLabel= makeDefaultLabel(
+            f'Runner ID: {runner}\nFinish Time: {back.getRunnerFinishTime(raceIndex,runner)}\nPlace: {placement}',
+            int(sys.scn_h/24),"nw",sys.cSecond)
+        finishTimeLabel.place(x=0,y=sys.scn_h/8,width=sys.scn_w,height=sys.scn_h/2)
     
 #Cross Country Race ####################################################################################################
 
@@ -318,7 +386,7 @@ def timerScreen(vTimerOn = True):
         timerButtons(False)
     updateClock()
     
-#OnScreen Time of day clock###############################
+#OnScreen Time of day clock###########################################################################
 
 def cornerClockDisplay():
     cornerClock = clockLabel(back.getShortToday(), None, int(sys.scn_h / 32))
@@ -343,7 +411,7 @@ def cornerClockDisplay():
     
     updateCornerClock() 
 
-#Kill Program
+#Kill Program################################################################################################
 def closeApp():
     confirmChoice('Exit\nPortaTrack\nConnect?',lambda: root.destroy(),lambda: mainMenuScreen())
    
