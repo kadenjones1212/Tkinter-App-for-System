@@ -50,7 +50,10 @@ def updateHeader(vtext,boolIcons = True):
         
         closeIconButton = makeDefaultButton('✖', closeApp,int(sys.scn_h / 25),'#ff0000','#aa0000')
         closeIconButton.place(x=sys.scn_w - icon_size, y=0, width=icon_size, height=icon_size)
-    
+        
+        backIconButton = makeDefaultButton('<',None,int(sys.scn_h / 25),'#000000','#444444')
+        backIconButton.place(x=sys.scn_w - 5*icon_size, y=0, width=icon_size*2, height=icon_size)
+        
         
 
 # Footer Setup
