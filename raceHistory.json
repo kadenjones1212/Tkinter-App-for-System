@@ -2,6 +2,7 @@
   {
     "runType": "race",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "runDistance": "400m",
     "date": "Mon Mar 17 11:02:51 2025",
     "events": [
@@ -25,10 +26,15 @@
     "runDistance": "3200m",
     "date": "Wed Apr 30 20:23:29 2025",
 >>>>>>> Stashed changes
+=======
+    "runDistance": "3200m",
+    "date": "Wed Apr 30 20:23:29 2025",
+>>>>>>> Stashed changes
     "events": [
       {
         "eventType": "runnerEnd",
         "runnerID": 5555,
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         "raceTime": "3.4"
       },
@@ -215,6 +221,18 @@
         "eventType": "runnerEnd",
         "runnerID": 5555,
         "raceTime": "6.2"
+=======
+        "raceTime": "3.7"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 5555,
+        "raceTime": "5.6"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 5555,
+        "raceTime": "6.2"
       },
       {
         "eventType": "runnerEnd",
@@ -224,6 +242,37 @@
       {
         "eventType": "runnerEnd",
         "runnerID": 3333,
+        "raceTime": "9.5"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 3333,
+        "raceTime": "11.6"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 5555,
+        "raceTime": "12.3"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 3333,
+        "raceTime": "12.9"
+>>>>>>> Stashed changes
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 2222,
+<<<<<<< Updated upstream
+        "raceTime": "6.6"
+=======
+        "raceTime": "13.6"
+>>>>>>> Stashed changes
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 3333,
+<<<<<<< Updated upstream
         "raceTime": "9.5"
       },
       {
@@ -250,6 +299,8 @@
       {
         "eventType": "runnerEnd",
         "runnerID": 3333,
+=======
+>>>>>>> Stashed changes
         "raceTime": "14.3"
       },
       {
