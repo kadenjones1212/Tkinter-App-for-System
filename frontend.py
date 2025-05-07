@@ -304,7 +304,7 @@ def raceViewEndTimesScreen(raceIndex):
         if runnerIndex < back.getNumberOfRunners(raceIndex):
             
             placementID = f"{raceFinishEvents[runnerIndex]['runnerID']}"
-            placementTime = f'{raceFinishEvents[runnerIndex]['raceTime']}'
+            placementTime = f"{raceFinishEvents[runnerIndex]['raceTime']}"
             
             indexLabel = makeDefaultLabel(runnerIndex + 1, int(sys.scn_h / 18))
             indexLabel.place(x=0, y=sys.scn_h / 8 + sys.scn_h/16 +sys.scn_h/32 + spacing * i, width=sys.scn_w / 16, height=rowHeight)

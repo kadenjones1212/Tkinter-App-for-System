@@ -1,5 +1,5 @@
 scn_w = 1280
-scn_h = 800
+scn_h = 720
 center_x = int(scn_w/2)
 center_y = int(scn_h/2)
 mainButton_w = scn_w/1.25

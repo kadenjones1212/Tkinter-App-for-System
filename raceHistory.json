@@ -1,6 +1,7 @@
 [
   {
     "runType": "race",
+<<<<<<< Updated upstream
     "runDistance": "400m",
     "date": "Mon Mar 17 11:02:51 2025",
     "events": [
@@ -20,10 +21,15 @@
     "runType": "race",
     "runDistance": "5K",
     "date": "Mon Mar 17 10:19:34 2025",
+=======
+    "runDistance": "3200m",
+    "date": "Wed Apr 30 20:23:29 2025",
+>>>>>>> Stashed changes
     "events": [
       {
         "eventType": "runnerEnd",
         "runnerID": 5555,
+<<<<<<< Updated upstream
         "raceTime": "3.4"
       },
       {
@@ -197,46 +203,94 @@
         "eventType": "runnerLap",
         "runnerID": 6666,
         "raceTime": "4:28"
+=======
+        "raceTime": "3.7"
       },
       {
         "eventType": "runnerEnd",
         "runnerID": 5555,
-        "raceTime": "4:18"
+        "raceTime": "5.6"
       },
       {
         "eventType": "runnerEnd",
-        "runnerID": 4444,
-        "raceTime": "4:19"
-      },
-      {
-        "eventType": "runnerEnd",
-        "runnerID": 3333,
-        "raceTime": "4:21"
+        "runnerID": 5555,
+        "raceTime": "6.2"
       },
       {
         "eventType": "runnerEnd",
         "runnerID": 2222,
-        "raceTime": "4:22"
+        "raceTime": "6.6"
       },
       {
         "eventType": "runnerEnd",
-        "runnerID": 1111,
-        "raceTime": "4:24"
+        "runnerID": 3333,
+        "raceTime": "9.5"
       },
       {
         "eventType": "runnerEnd",
-        "runnerID": 7777,
-        "raceTime": "4:25"
+        "runnerID": 3333,
+        "raceTime": "11.6"
+>>>>>>> Stashed changes
       },
       {
         "eventType": "runnerEnd",
-        "runnerID": 8888,
-        "raceTime": "4:27"
+        "runnerID": 5555,
+        "raceTime": "12.3"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 3333,
+        "raceTime": "12.9"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 2222,
+        "raceTime": "13.6"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 3333,
+        "raceTime": "14.3"
       },
       {
         "eventType": "runnerEnd",
         "runnerID": 6666,
-        "raceTime": "4:28"
+        "raceTime": "15.2"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 8888,
+        "raceTime": "15.9"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 2222,
+        "raceTime": "16.4"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 8888,
+        "raceTime": "16.8"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 7777,
+        "raceTime": "17.0"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 7777,
+        "raceTime": "17.1"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 4444,
+        "raceTime": "17.3"
+      },
+      {
+        "eventType": "runnerEnd",
+        "runnerID": 7777,
+        "raceTime": "17.4"
       }
     ]
   }

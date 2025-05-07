@@ -197,12 +197,3 @@ def getNumberOfRunners(index):
 def getRunnerEvent(index):
     events = getObjectFromJSON('raceHistory.json',index,"events")
     return events[index]
-
-
-
-
-    
- 
-
-
-         
