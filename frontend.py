@@ -129,19 +129,18 @@ def mainMenuScreen():
 
     # Start race button
     startRaceButton = makeDefaultButton('Start A Race', raceSelectScreen)
-    startRaceButton.place(x=sys.center_x - sys.mainButton_w / 2, y=sys.center_y - 2 * sys.mainButton_h, width=sys.mainButton_w, height=sys.mainButton_h)
+    startRaceButton.place(x=sys.scn_w/16,
+                          y=sys.scn_h/4,
+                          width=sys.scn_w/2-sys.scn_w/8,
+                          height=sys.scn_h/2)
 
     # History button
     historyButton = makeDefaultButton('Race History', raceHistoryScreen)
-    historyButton.place(x=sys.center_x - sys.mainButton_w / 2, y=sys.center_y - 2 * sys.mainButton_h / 2, width=sys.mainButton_w, height=sys.mainButton_h)
-
-    # Calibrate button
-    calibrateButton = makeDefaultButton('Calibrate', None)
-    calibrateButton.place(x=sys.center_x - sys.mainButton_w / 2, y=sys.center_y + 0 * sys.mainButton_h / 2, width=sys.mainButton_w, height=sys.mainButton_h)
-
-    # Setup help button (NOT THE SAME AS SETTINGS)
-    setupHelpButton = makeDefaultButton('Setup Help', None)
-    setupHelpButton.place(x=sys.center_x - sys.mainButton_w / 2, y=sys.center_y + 1 * sys.mainButton_h, width=sys.mainButton_w, height=sys.mainButton_h)
+    historyButton.place(x=sys.scn_w/16+ sys.scn_w/2,
+                          y=sys.scn_h/4,
+                          width=sys.scn_w/2-sys.scn_w/8,
+                          height=sys.scn_h/2)
+    
     cornerClockDisplay()
     
 #Settings Screen####################################################################################
